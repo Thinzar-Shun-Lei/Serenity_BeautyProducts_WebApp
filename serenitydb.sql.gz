@@ -1,0 +1,785 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Apr 28, 2024 at 06:52 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `serenitydb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `BrandID` int(11) NOT NULL,
+  `BrandName` varchar(100) NOT NULL,
+  `BrandStatus` varchar(50) NOT NULL,
+  `BrandImage` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`BrandID`, `BrandName`, `BrandStatus`, `BrandImage`) VALUES
+(1, 'Bella', 'Active', 'BrandPhoto/_BellaBrandLogo.png'),
+(2, 'Nivea', 'Active', 'BrandPhoto/_Nivea.png'),
+(4, 'Novo Cosmetics', 'Active', 'BrandPhoto/_Novo.png'),
+(5, 'Zaki', 'Active', 'BrandPhoto/_Brand-Zakilogo.jpg'),
+(6, 'Shwe Pyi Nan', 'Active', 'BrandPhoto/_Brand-ShwePyiNanLogo.jpg'),
+(7, 'Essence', 'Active', 'BrandPhoto/_BrandEssenceLogo.png'),
+(8, 'Cute Press', 'Active', 'BrandPhoto/_Brand-CutePressLogo.jpg'),
+(9, 'Miscellaneous', 'Active', 'BrandPhoto/_Brand-Miscellaneous.PNG'),
+(11, 'Garnier', 'Active', 'BrandPhoto/_GarnierLogo.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `CategoryID` int(11) NOT NULL,
+  `CategoryName` varchar(100) NOT NULL,
+  `CategoryStatus` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`CategoryID`, `CategoryName`, `CategoryStatus`) VALUES
+(1, 'Skincare', 'Active'),
+(2, 'Lotion', 'Active'),
+(4, 'Lip Mud', 'Active'),
+(5, 'Lipstick', 'Active'),
+(6, 'Lip gloss', 'Active'),
+(7, 'makeup', 'Active'),
+(8, 'Blusher', 'Active'),
+(9, 'Eyeshadow', 'Active'),
+(10, 'Eyeliner', 'Active'),
+(11, 'Face Mask', 'Active'),
+(12, 'Hair Oil', 'Active'),
+(13, 'Perfume', 'Active'),
+(14, 'Oil Perfume', 'Active'),
+(15, 'Facial Foam', 'Active'),
+(16, 'Thanaka', 'Active'),
+(17, 'Concealer', 'Active'),
+(18, 'Shampoo', 'Active'),
+(19, 'Foundation', 'Active'),
+(20, 'Deodorant', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `ContactID` int(11) NOT NULL,
+  `CustomerName` varchar(100) DEFAULT NULL,
+  `ContactPhone` varchar(40) DEFAULT NULL,
+  `ContactEmail` varchar(40) DEFAULT NULL,
+  `ContactMessage` varchar(255) DEFAULT NULL,
+  `ContactStatus` varchar(100) DEFAULT NULL,
+  `CustomerID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`ContactID`, `CustomerName`, `ContactPhone`, `ContactEmail`, `ContactMessage`, `ContactStatus`, `CustomerID`) VALUES
+(1, 'Myat Thu', '09784564323', 'meliaMyat12@gmail.com', 'I would like to know the delivery details', 'Contacted', 3),
+(2, 'Myintzu', '09772341241', 'myintzu12@gmail.com', 'I want to make sure which products are suitable for me.', 'Contacted', 1),
+(3, 'Myintzu', '09772341241', 'Myintzu12@gmail.com', 'I would like to know which product would be suitable for my skin. Could you please recommend?', 'Pending', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `CustomerID` int(11) NOT NULL,
+  `CustomerName` varchar(50) NOT NULL,
+  `CustomerEmail` varchar(50) NOT NULL,
+  `CustomerPassword` varchar(50) NOT NULL,
+  `CustomerPhone` varchar(50) NOT NULL,
+  `CustomerAddress` varchar(255) NOT NULL,
+  `CustomerProfileImg` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`CustomerID`, `CustomerName`, `CustomerEmail`, `CustomerPassword`, `CustomerPhone`, `CustomerAddress`, `CustomerProfileImg`) VALUES
+(1, 'Myintzu', 'myintzu12@gmail.com', 'Myintzu123$', '09772341241', 'Thamine, Yangon', 'CustomerPhoto/_Myintzu.jpg'),
+(2, 'Malika', 'malika12@gmail.com', 'Malika123$', '09794321234', 'Kabar Aye Township, Yangon', 'CustomerPhoto/_MalikaProfile.jpg'),
+(3, 'Myat Thu', 'MyatThu@gmail.com', 'MyatThu123$', '09784564323', 'North Dagon, Yangon', 'CustomerPhoto/_MyatThuProfilePict.jpg'),
+(4, 'May Noe Eain', 'mayeain12@gmail.com', 'Maynoe123$', '09876787656', 'Mayangone Township, Yangon', 'CustomerPhoto/_MayMoeProfile.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deliveries`
+--
+
+CREATE TABLE `deliveries` (
+  `DeliveryID` varchar(50) NOT NULL,
+  `DeliveryDate` date DEFAULT NULL,
+  `Status` varchar(100) DEFAULT NULL,
+  `Remarks` text DEFAULT NULL,
+  `StaffID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `deliveries`
+--
+
+INSERT INTO `deliveries` (`DeliveryID`, `DeliveryDate`, `Status`, `Remarks`, `StaffID`) VALUES
+('', '2024-04-25', 'Assigned', '', 6),
+('DY_000001', '2024-04-18', 'Complete', '', 6),
+('DY_000002', '2024-04-12', 'Assigned', '', 6),
+('DY_000003', '2024-04-11', 'Complete', 'Noted', 6),
+('DY_000004', '2024-04-10', 'Assigned', '', 6),
+('DY_000005', '2024-04-08', 'Assigned', '', 10),
+('DY_000006', '2024-04-09', 'Assigned', '', 6),
+('DY_000007', '2024-04-10', 'Assigned', '', 10),
+('DY_000008', '2024-04-09', 'Complete', '', 6),
+('DY_000009', '0000-00-00', 'Assigned', '', 6),
+('DY_000010', '2024-04-09', 'Assigned', '', 6),
+('DY_000011', '2024-04-23', 'Complete', '', 10),
+('DY_000012', '2024-04-26', 'Assigned', '', 6),
+('DY_000013', '2024-04-27', 'Assigned', '', 6),
+('DY_000014', '2024-04-30', 'Assigned', '', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orderdetails`
+--
+
+CREATE TABLE `orderdetails` (
+  `OrderID` varchar(50) NOT NULL,
+  `ProductID` int(11) NOT NULL,
+  `Quantity` int(11) DEFAULT NULL,
+  `OrderPrice` int(11) DEFAULT NULL,
+  `TotalPrice` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orderdetails`
+--
+
+INSERT INTO `orderdetails` (`OrderID`, `ProductID`, `Quantity`, `OrderPrice`, `TotalPrice`) VALUES
+('Ord_000001', 13, 1, 4000, 4000),
+('Ord_000001', 29, 1, 3300, 3300),
+('Ord_000002', 13, 2, 4000, 8000),
+('Ord_000002', 29, 1, 3300, 3300),
+('Ord_000003', 3, 1, 3999, 3999),
+('Ord_000004', 3, 1, 3999, 3999),
+('Ord_000004', 12, 2, 6000, 12000),
+('Ord_000006', 3, 1, 3999, 3999),
+('Ord_000006', 9, 1, 5500, 5500),
+('Ord_000007', 3, 1, 3999, 3999),
+('Ord_000007', 9, 1, 5500, 5500),
+('Ord_000008', 14, 1, 7000, 7000),
+('Ord_000009', 8, 1, 5500, 5500),
+('Ord_000011', 14, 1, 7000, 7000),
+('Ord_000012', 13, 0, 4000, 0),
+('Ord_000013', 13, 1, 4000, 4000),
+('Ord_000014', 21, 1, 24700, 24700),
+('Ord_000015', 8, 2, 5500, 11000),
+('Ord_000016', 14, 2, 7000, 14000),
+('Ord_000016', 15, 2, 18000, 36000),
+('Ord_000017', 12, 1, 6000, 6000),
+('Ord_000017', 20, 1, 33000, 33000),
+('Ord_000018', 3, 1, 3999, 3999),
+('Ord_000018', 15, 1, 18000, 18000),
+('Ord_000019', 26, 1, 5800, 5800);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `OrderID` varchar(50) NOT NULL,
+  `OrderDate` date DEFAULT NULL,
+  `CustomerID` int(11) DEFAULT NULL,
+  `TownshipID` int(11) DEFAULT NULL,
+  `TotalQuantity` int(11) DEFAULT NULL,
+  `SubTotal` int(11) DEFAULT NULL,
+  `DeliveryFee` int(11) DEFAULT NULL,
+  `GrandTotal` int(11) DEFAULT NULL,
+  `DeliveryAddress` text DEFAULT NULL,
+  `ContactPhone` varchar(50) DEFAULT NULL,
+  `PaymentType` varchar(100) DEFAULT NULL,
+  `OrderStatus` varchar(100) DEFAULT NULL,
+  `DeliveryID` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`OrderID`, `OrderDate`, `CustomerID`, `TownshipID`, `TotalQuantity`, `SubTotal`, `DeliveryFee`, `GrandTotal`, `DeliveryAddress`, `ContactPhone`, `PaymentType`, `OrderStatus`, `DeliveryID`) VALUES
+('Ord_000001', '2024-03-31', 1, 5, 2, 7300, 3000, 10300, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Confirmed', 'DY_000001'),
+('Ord_000002', '2024-03-31', 1, 18, 3, 11300, 3500, 14800, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Confirmed', 'DY_000001'),
+('Ord_000003', '2024-03-31', 1, 4, 1, 3999, 3000, 6999, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Confirmed', 'DY_000001'),
+('Ord_000004', '2024-03-31', 1, 17, 3, 15999, 3500, 19499, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Confirmed', 'DY_000008'),
+('Ord_000005', '2024-04-07', 2, 3, 2, 32600, 3500, 36100, 'Kabar Aye Township, Yangon', '09794321234', 'Cash On Delivery', 'Confirmed', 'DY_000007'),
+('Ord_000006', '2024-04-07', 2, 3, 2, 9499, 3500, 12999, 'Kabar Aye Township, Yangon', '09794321234', 'Cash On Delivery', 'Confirmed', 'DY_000009'),
+('Ord_000007', '2024-04-07', 2, 1, 2, 9499, 3000, 12499, 'Kabar Aye Township, Yangon', '09794321234', 'Cash On Delivery', 'Confirmed', 'DY_000009'),
+('Ord_000008', '2024-04-07', 1, 4, 1, 7000, 3000, 10000, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Confirmed', 'DY_000008'),
+('Ord_000009', '2024-04-07', 2, 1, 2, 9499, 3000, 12499, 'Kabar Aye Township, Yangon', '09794321234', 'Cash On Delivery', 'Confirmed', 'DY_000010'),
+('Ord_000010', '2024-04-07', 2, 3, 0, 0, 3500, 3500, 'Kabar Aye Township, Yangon', '09794321234', 'Cash On Delivery', 'Confirmed', 'DY_000010'),
+('Ord_000011', '2024-04-07', 2, 6, 1, 7000, 4500, 11500, 'Kabar Aye Township, Yangon', '09794321234', 'Cash On Delivery', 'Confirmed', 'DY_000012'),
+('Ord_000012', '2024-04-10', 1, 3, 2, 7999, 3500, 11499, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Confirmed', 'DY_000011'),
+('Ord_000013', '2024-04-10', 1, 3, 2, 7999, 3500, 11499, 'Thamine, Yangon', '09772341241', 'Visa Card', 'Confirmed', 'DY_000011'),
+('Ord_000014', '2024-04-10', 1, 4, 2, 30200, 3000, 33200, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Confirmed', 'DY_000014'),
+('Ord_000015', '2024-04-10', 1, 16, 3, 14300, 2500, 16800, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Confirmed', 'DY_000013'),
+('Ord_000016', '2024-04-10', 1, 1, 4, 50000, 3000, 53000, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Confirmed', 'DY_000004'),
+('Ord_000017', '2024-04-10', 1, 4, 2, 39000, 3000, 42000, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Confirmed', 'DY_000014'),
+('Ord_000018', '2024-04-17', 1, 1, 2, 21999, 3000, 24999, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Confirmed', 'DY_000004'),
+('Ord_000019', '2024-04-24', 1, 1, 1, 5800, 3000, 8800, 'Thamine, Yangon', '09772341241', 'Cash On Delivery', 'Pending', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `positions`
+--
+
+CREATE TABLE `positions` (
+  `PositionID` int(11) NOT NULL,
+  `PositionName` varchar(100) NOT NULL,
+  `PositionStatus` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `positions`
+--
+
+INSERT INTO `positions` (`PositionID`, `PositionName`, `PositionStatus`) VALUES
+(1, 'Manager', 'Active'),
+(2, 'Administrator', 'Active'),
+(3, 'Delivery Man', 'Active'),
+(5, 'Operational Staff', 'Active'),
+(6, 'Owner', 'Active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `ProductID` int(11) NOT NULL,
+  `ProductName` varchar(100) DEFAULT NULL,
+  `BrandID` int(11) DEFAULT NULL,
+  `CategoryID` int(11) DEFAULT NULL,
+  `ManufacturedDate` date DEFAULT NULL,
+  `ExpiredDate` date DEFAULT NULL,
+  `Quantity` int(11) DEFAULT NULL,
+  `PurchasePrice` int(11) DEFAULT NULL,
+  `SellPrice` int(11) DEFAULT NULL,
+  `Profit` int(11) DEFAULT NULL,
+  `Description` text DEFAULT NULL,
+  `ProductStatus` varchar(50) DEFAULT NULL,
+  `Image1` varchar(255) DEFAULT NULL,
+  `Image2` varchar(255) DEFAULT NULL,
+  `Image3` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`ProductID`, `ProductName`, `BrandID`, `CategoryID`, `ManufacturedDate`, `ExpiredDate`, `Quantity`, `PurchasePrice`, `SellPrice`, `Profit`, `Description`, `ProductStatus`, `Image1`, `Image2`, `Image3`) VALUES
+(1, 'Thanakha Skincare Collection', 1, 1, '2024-02-01', '2026-02-01', 7, 15000, 19500, 4500, 'Thanakha Skincare Collection Set of 2 Items (Day & Night)', 'Active', 'ProductPhoto/_P1_1.jpg', 'ProductPhoto/_P1_2.jpg', 'ProductPhoto/_P1_3.jpg'),
+(3, 'Velvet Lip Mud Maroon - #58', 4, 4, '2024-01-02', '2026-02-02', 28, 3500, 3999, 499, 'Novo Velvet Lip Mud Maroon is a 100% genuine product that can be used on both lips and cheeks. It has a velvet-matte finish, and is said to feel silky and smooth. It is also waterproof, long-lasting, and smudge-proof', 'Active', 'ProductPhoto/_P2_1.jpg', 'ProductPhoto/_P2_2.jpg', 'ProductPhoto/_P2_3(LipMudMaroon).jpg'),
+(4, 'Little Milk - Rose Ripple', 4, 4, '2024-02-04', '2026-02-04', 15, 3500, 5500, 500, 'Little Milk Bottles Soft Mist Liquid Lipstick Rich Color Lightweight Lip Mud Blusher Velvet Matte Lip Glaze Long-wearing Makeup', 'Active', 'ProductPhoto/_P3_1.jpg', 'ProductPhoto/_P3_2.jpg', 'ProductPhoto/_P3_3.PNG'),
+(6, 'Little Milk - Banquet Song', 4, 4, '2024-02-05', '2026-02-04', 10, 3500, 5500, 500, 'Little Milk Bottles Soft Mist Liquid Lipstick Rich Color Lightweight Lip Mud Blusher Velvet Matte Lip Glaze Long-wearing Makeup', 'Active', 'ProductPhoto/_P5_3.PNG', 'ProductPhoto/_P4_1.PNG', 'ProductPhoto/_P4_2.PNG'),
+(7, 'Little Milk - Happy', 4, 4, '2024-02-05', '2026-02-04', 30, 3500, 5500, 500, 'Little Milk Bottles Soft Mist Liquid Lipstick Rich Color Lightweight Lip Mud Blusher Velvet Matte Lip Glaze Long-wearing Makeup', 'Active', 'ProductPhoto/_P6_3.PNG', 'ProductPhoto/_P4_1.PNG', 'ProductPhoto/_P4_2.PNG'),
+(8, 'Bella Sugar Lollipop Lipstick', 1, 5, '2024-03-05', '2026-03-04', 30, 5500, 5500, 1500, 'Sugar Lips is one of our best selling matte liquid lipstick collections. The candy inspired lipsticks smell like vanilla ice cream, is long-lasting and enriched with Vitamin E to protect the lips and provide moisture throughout the day.', 'Active', 'ProductPhoto/_P7_1.PNG', 'ProductPhoto/_P7_2.jpg', 'ProductPhoto/_P7_3.jpeg'),
+(9, 'Essence Extreme Shine Volume Lipgloss 101 Milky Way  ', 7, 6, '2024-01-02', '2026-01-02', 7, 4000, 5500, 1500, 'essence Extreme Shine Volume Lipgloss 101 Milky Way 5ml consists of a lipgloss rich in shiny particles that add a glamorous touch to any makeup look. In fact, this extraordinary lipgloss is designed to enhance your natural beauty and provide an unparallel', 'Active', 'ProductPhoto/_P8_1.PNG', 'ProductPhoto/_P8_2.PNG', 'ProductPhoto/_P8_3.png'),
+(10, 'Cindi Vitamin E Oil', 9, 12, '2024-03-01', '2026-03-02', 10, 4500, 5000, 500, 'Vitamin E oil for the hair strength and longetivity', 'Active', 'ProductPhoto/_P9_1.PNG', 'ProductPhoto/_P9_2.PNG', 'ProductPhoto/_P9_3.jpg'),
+(11, 'QUICK Black Shampoo', 9, 18, '2024-03-01', '2026-03-01', 10, 1000, 1500, 500, 'Instant Hair Color Shampoo for Gray Hair. A shampoo for both dyeing hair and washing. ', 'Active', 'ProductPhoto/_P10_1.jpg', 'ProductPhoto/_P10_2.jpg', 'ProductPhoto/_P10_1.jpg'),
+(12, 'Essence Ultra Last Lipstick', 7, 5, '2024-03-01', '2026-03-01', 17, 5000, 6000, 500, 'Essence Ultra Last Instant Colour Lipstick is a creamy lipstick that is said to instantly color the lips for an intense look. It has a soft, light texture and is said to not settle into lip lines or cling to dry patches. ', 'Active', 'ProductPhoto/_P11_1.jpg', 'ProductPhoto/_P11_2.jpg', 'ProductPhoto/_P11_3.jpg'),
+(13, 'Essence Concealer Pencil (01 Soft Beige)', 7, 17, '2024-02-01', '2026-02-01', 2, 3500, 4000, 500, 'What is pencil concealer?\r\nThe Concealer Pencil hides spots and blotches, minimizes lines and wrinkles and reshapes the contour of lips. It blends like a cream but corrects with the precision of a pencil. Each dual-ended crayon has two different colored tips for more color combination possibilities.', 'Active', 'ProductPhoto/_P12_1.jpg', 'ProductPhoto/_P12_2.jpg', 'ProductPhoto/_P12_1.jpg'),
+(14, 'Essence Concealer Palette', 7, 17, '2024-03-01', '2026-03-01', 11, 6000, 7000, 1000, 'With its four colour-correcting shades, the essence CONCEAL like a PRO colour correcting palette makes all imperfections vanish! The soft, creamy concealers have an instant effect: Green neutralises redness, yellow evens out pigmentation, red covers dark circles and violet ensures a radiant complexion!', 'Popular', 'ProductPhoto/_P13_1.jpg', 'ProductPhoto/_P13_2.jpg', 'ProductPhoto/_P13_1.jpg'),
+(15, 'Essence Banana Powder', 7, 7, '2024-03-01', '2026-03-01', 6, 15000, 18000, 3000, 'The Essence Brighten Up! Banana Powder 20 Bababanana is a transparent mattifying powder. This versatile powder sets your makeup look, softens fine lines and camouflages imperfections. Ideal for a matte make-up look!', 'Active', 'ProductPhoto/_P14_1.jpg', 'ProductPhoto/_P14_2.jpg', 'ProductPhoto/_P14_3.jpg'),
+(16, 'Essence the Blush', 7, 8, '2024-03-01', '2026-03-01', 9, 11000, 14600, 3600, 'The pressed, silky-soft powder texture feels comfortable to wear, is highly-pigmented, long-lasting and blends easily. Thanks to its buildable coverage, a wide variety of looks can be created. With matte colours and a pearly finish, your make-up and complexion instantly look fresher.', 'Active', 'ProductPhoto/_P15_1.jpg', 'ProductPhoto/_P15_2.jpg', 'ProductPhoto/_P15_1.jpg'),
+(17, 'Essence Long-Lasting Foundation', 7, 19, '2024-03-01', '2026-03-01', 10, 21000, 24000, 3000, 'It has a light, liquid formula that does not clog pores and is imperceptible on the skin. It stays on your face all day long, without the need for additional touch-ups. A specially developed formula provides a strong coverage effect that lasts up to 16 hours from the time of application.', 'Active', 'ProductPhoto/_P16_1.jpg', 'ProductPhoto/_P16_2.jpg', 'ProductPhoto/_P16_3.jpg'),
+(18, 'Essence Brow Powder Set (01 Light and Brown)', 7, 9, '2024-03-01', '2026-03-01', 10, 11000, 15200, 4200, 'Brow Powder Set by Essence.\r\nIt consists of 2 pressed, matte powders of different shades and a synthetic brush for application. It will quickly help you give your eyebrows the right shape and the desired shade.', 'Active', 'ProductPhoto/_P17_1.jpg', 'ProductPhoto/_P17_2.jpg', 'ProductPhoto/_P17_3.jpg'),
+(19, 'Essence Brow Powder Set (02 Deep and Dark)', 7, 9, '2024-03-01', '2026-03-01', 10, 11000, 15200, 4200, 'Brow Powder Set by Essence.\r\nIt consists of 2 pressed, matte powders of different shades and a synthetic brush for application. It will quickly help you give your eyebrows the right shape and the desired shade.', 'Active', 'ProductPhoto/_P18_1.jpg', 'ProductPhoto/_P18_2.jpg', 'ProductPhoto/_P18_3.jpg'),
+(20, 'Essence Peachy Blossom Palette', 7, 8, '2024-03-01', '2026-03-01', 9, 28000, 33000, 5000, 'The peachy BLOSSOM blush & highlighter palette contains everything you need for a fresh, radiant look: 3 blush shades and 2 highlighters with matte to shimmering effects. The powder texture is super-easy to apply and blend. With an integrated mirror for a quick touch-up on the go.', 'Active', 'ProductPhoto/_P19_1.jpg', 'ProductPhoto/_P19_2.jpg', 'ProductPhoto/_P19_3.jpg'),
+(21, 'Essence Nude Palette', 7, 8, '2024-03-01', '2026-03-01', 9, 19800, 24700, 4900, 'The Nude edition eyeshadow palette brings the eyes to shine with its highly pigmented colour nuances. From neutral and soft tones to matte formulas to pearly effects, the palette offers everything that makes the make-up heart beat faster.', 'Popular', 'ProductPhoto/_P20_1.jpg', 'ProductPhoto/_P20_2.jpg', 'ProductPhoto/_P20_3.jpg'),
+(22, 'Cute Press Deodorant (Purple)', 8, 20, '2024-03-01', '2026-03-01', 10, 5900, 6900, 1000, '​The cute press roll on, which is so cute that you are asked what kind of perfume you put on it, smells just like your own body, and makes your skin soft without sweating, dry skin, or burning.', 'Active', 'ProductPhoto/_P21_1.jpg', 'ProductPhoto/_P21_2.jpg', 'ProductPhoto/_P21_3.jpg'),
+(23, 'Cute Press  Magic Power ', 8, 19, '2024-03-01', '2026-03-01', 10, 12000, 16500, 4500, 'This silky smooth foundation powder instantly creates perfect looking skin that stays beautiful all day long.', 'Popular', 'ProductPhoto/_P22_1.jpg', 'ProductPhoto/_P22_2.jpg', 'ProductPhoto/_P22_3.jpg'),
+(24, 'Ideal White Whitening Milk', 8, 2, '2024-03-01', '2026-03-01', 10, 16000, 18200, 2200, 'What is whitening milk?\r\nThe whitening milk has been formulated for dry skin and skin subjected to hyperpigmentation disorders. It moisturizes the skin and evens out the complexion.', 'Active', 'ProductPhoto/_P23_1.jpg', 'ProductPhoto/_P23_2.jpg', 'ProductPhoto/_P23_3.jpg'),
+(25, 'Moisturizing Cucumber Foam', 8, 15, '2024-03-01', '2026-03-01', 10, 5000, 5800, 800, 'A mild facial foam that gently removes make up, dirt and impurities. It is enriched with Jojoba Oil to keep your skin soft and smooth.', 'Active', 'ProductPhoto/_P24_1.jpg', 'ProductPhoto/_P24_2.jpg', 'ProductPhoto/_P24_3.jpg'),
+(26, 'Moisturizing Orange Foam', 8, 15, '2024-03-01', '2026-03-01', 9, 5000, 5800, 800, 'Orange is quite suitable for people with oily skin. After using it, the face will be noticeably brighter.', 'Active', 'ProductPhoto/_P25_1.jpg', 'ProductPhoto/_P25_2.jpg', 'ProductPhoto/_P25_3.jpg'),
+(27, 'Moisturizing Tomato Foam', 8, 15, '2024-03-01', '2026-03-01', 12, 5000, 5800, 800, 'Helps achieve clean and glowing skin, soothes skin inflammation, stimulates collagen production, and improves overall health of the skin.', 'Active', 'ProductPhoto/_P26_1.jpg', 'ProductPhoto/_P26_2.jpg', 'ProductPhoto/_P26_3.jpg'),
+(29, 'Bella Detoxifying Charcoal Peel Off Mask', 1, 11, '2024-03-01', '2026-03-01', 1, 2500, 3300, 800, 'The Que Bella Detoxifying Charcoal Peel Off Mask is made for you! Enriched with charcoal powder, this mask is designed to help deeply cleanse and detoxify the skin.', 'Active', 'ProductPhoto/_P28_1.jpg', 'ProductPhoto/_P28_2.jpg', 'ProductPhoto/_P28_1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchasedetails`
+--
+
+CREATE TABLE `purchasedetails` (
+  `PurchaseID` varchar(50) NOT NULL,
+  `ProductID` int(11) NOT NULL,
+  `Quantity` int(11) DEFAULT NULL,
+  `PurchasePrice` int(11) DEFAULT NULL,
+  `TotalPrice` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `purchasedetails`
+--
+
+INSERT INTO `purchasedetails` (`PurchaseID`, `ProductID`, `Quantity`, `PurchasePrice`, `TotalPrice`) VALUES
+('Pc_000001', 1, 10, 15000, 150000),
+('Pc_000001', 3, 10, 5000, 50000),
+('Pc_000001', 7, 15, 5000, 75000),
+('Pc_000002', 8, 5, 3500, 17500),
+('Pc_000003', 8, 5, 3500, 17500),
+('Pc_000004', 8, 5, 3500, 17500),
+('Pc_000005', 8, 5, 3500, 17500),
+('Pc_000006', 4, 5, 3500, 17500),
+('Pc_000006', 7, 5, 3500, 17500),
+('Pc_000007', 7, 5, 3500, 17500),
+('Pc_000008', 6, 5, 3500, 17500),
+('Pc_000009', 3, 3, 3500, 10500),
+('Pc_000009', 8, 2, 4000, 8000),
+('Pc_000010', 14, 5, 6000, 30000),
+('Pc_000010', 27, 2, 5000, 10000),
+('Pc_000011', 12, 10, 5000, 50000),
+('Pc_000012', 1, 5, 15000, 75000),
+('Pc_000012', 3, 10, 3500, 35000),
+('Pc_000012', 4, 5, 3500, 17500),
+('Pc_000013', 1, 2, 15000, 30000),
+('Pc_000013', 8, 2, 4000, 8000),
+('Pc_000014', 8, 6, 5500, 33000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purchases`
+--
+
+CREATE TABLE `purchases` (
+  `PurchaseID` varchar(50) NOT NULL,
+  `PurchaseDate` date DEFAULT NULL,
+  `StaffID` int(11) DEFAULT NULL,
+  `SupplierID` int(11) DEFAULT NULL,
+  `TotalQuantity` int(11) DEFAULT NULL,
+  `TotalAmount` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `purchases`
+--
+
+INSERT INTO `purchases` (`PurchaseID`, `PurchaseDate`, `StaffID`, `SupplierID`, `TotalQuantity`, `TotalAmount`) VALUES
+('Pc_000001', '2024-03-08', 5, 4, 35, 275000),
+('Pc_000002', '2024-03-09', 5, 2, 5, 17500),
+('Pc_000003', '2024-03-09', 5, 2, 5, 17500),
+('Pc_000004', '2024-03-09', 5, 2, 5, 17500),
+('Pc_000005', '2024-03-13', 5, 2, 5, 17500),
+('Pc_000006', '2024-03-14', 5, 1, 10, 35000),
+('Pc_000007', '2024-03-15', 5, 1, 5, 17500),
+('Pc_000008', '2024-03-15', 5, 1, 5, 17500),
+('Pc_000009', '2024-03-15', 5, 4, 5, 18500),
+('Pc_000010', '2024-03-30', 5, 4, 7, 40000),
+('Pc_000011', '2024-04-03', 5, 4, 10, 50000),
+('Pc_000012', '2024-04-15', 1, 4, 20, 127500),
+('Pc_000013', '2024-04-24', 1, 2, 4, 38000),
+('Pc_000014', '2024-04-28', 1, 2, 6, 33000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `ReviewID` int(11) NOT NULL,
+  `CustomerID` int(11) DEFAULT NULL,
+  `ProductID` int(11) DEFAULT NULL,
+  `Rating` varchar(20) DEFAULT NULL,
+  `ReviewDescription` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`ReviewID`, `CustomerID`, `ProductID`, `Rating`, `ReviewDescription`) VALUES
+(1, 1, 13, '4', 'The product is so useful and cost-effective.'),
+(2, 1, 13, '3', 'Very useful.'),
+(3, 1, 15, '4', 'It is so useful for daily.'),
+(4, 1, 15, '4', 'Also it is cost-effective'),
+(5, 1, 15, '4', 'Also it is cost-effective'),
+(6, 1, 12, '3', 'So lovely.'),
+(7, 1, 16, '4', 'The blusher color is so attractive. I love it.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff`
+--
+
+CREATE TABLE `staff` (
+  `StaffID` int(11) NOT NULL,
+  `PositionID` int(11) DEFAULT NULL,
+  `StaffName` varchar(100) DEFAULT NULL,
+  `StaffPhone` varchar(50) DEFAULT NULL,
+  `StaffAddress` varchar(255) DEFAULT NULL,
+  `StaffEmail` varchar(100) DEFAULT NULL,
+  `StaffPassword` varchar(50) DEFAULT NULL,
+  `StaffPhoto` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`StaffID`, `PositionID`, `StaffName`, `StaffPhone`, `StaffAddress`, `StaffEmail`, `StaffPassword`, `StaffPhoto`) VALUES
+(1, 1, 'U Tin Maung', '09328374825', 'No. 321, Padommar Road, San Chaung Tsp, Yangon', 'UTinMaung@gmail.com', 'UTinMaung123$', 'StaffPhoto/_UTinMaungProfile.jpg'),
+(3, 6, 'U Thant Sin', '09876543212', 'Hlaing Township, Yangon, Myanmar', 'UThantSin@gmail.com', 'UThantSin123$', 'StaffPhoto/_UThantSinProfile.jpg'),
+(4, 1, 'Daw Aye Myint', '09876787765', 'Hlaing Township, Yangon, Myanmar', 'DawAyeMyint@gmail.com', 'DawAyeMyint123$', 'StaffPhoto/_DawAyeMyintProfile.jpg'),
+(5, 5, 'Ma Moe Pyae Pyae', '09876665651', 'Mayangone Township, Yangon, Myanmar', 'MoePyae@gmail.com', 'MoePyae123$', 'StaffPhoto/_MoePyaeProfile.jpg'),
+(6, 3, 'Mg Moe Thu', '09972838475', 'South Okkalapa, Yangon, Myanmar', 'MoeThu@gmail.com', 'MoeThu123$', 'StaffPhoto/_MoeThuProfile.jpg'),
+(9, 5, 'Hnin Pwint Wai', '09876543212', 'KabarAye', 'HninPwint@gmail.com', 'HninPwint123$', 'StaffPhoto/_HninPwintProfile.jpg'),
+(10, 3, 'Min Thant', '097654323432', 'Mayangone Tsp, Yangon', 'minthant12@gmail.com', 'Minthant123$', 'StaffPhoto/_MinThantProfile.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suppliers`
+--
+
+CREATE TABLE `suppliers` (
+  `SupplierID` int(11) NOT NULL,
+  `SupplierName` varchar(100) NOT NULL,
+  `SupplierEmail` varchar(100) NOT NULL,
+  `SupplierPhone` varchar(50) NOT NULL,
+  `SupplierAddress` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO `suppliers` (`SupplierID`, `SupplierName`, `SupplierEmail`, `SupplierPhone`, `SupplierAddress`) VALUES
+(1, 'Beauty & Me', 'info@beautyandmemyanmar.com', ' 09765 117366', 'Paw San Hmwe Residence, Paw San Hmwe Street , Thingangyun, Yangon'),
+(2, 'Bella', 'customerservice@abcbeauty.com', '019345533', 'No 11, 6th Street, Ward No.8 , South Okkalapa Industrial Zone, South Okkalapa Township, Yangon.'),
+(4, 'SMT Company', 'shwemintharorganization@gmail.com', '09776655654', '(D) Block, Theingyi Market, 24th Street, Pabedan Township, Yangon'),
+(5, 'Cute Press', 'infoCutepress@gmail.com', '09786545362', 'Thukha St., Myaynigone, Sanchaung Tsp, Yangon'),
+(6, 'Nova Cosmetics Myanmar', 'NovaCosmeticsMM@gmail.com', '09882654904', '50 street lower block, Yangon, Myanmar'),
+(8, 'Garnier', 'Garnier@gmail.com', '09876567765', 'Myaynigone, Yangon');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `townships`
+--
+
+CREATE TABLE `townships` (
+  `TownshipID` int(11) NOT NULL,
+  `TownshipName` varchar(100) NOT NULL,
+  `PostalCode` varchar(50) NOT NULL,
+  `DeliveryFee` int(11) NOT NULL,
+  `TownshipStatus` varchar(50) NOT NULL,
+  `Map` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `townships`
+--
+
+INSERT INTO `townships` (`TownshipID`, `TownshipName`, `PostalCode`, `DeliveryFee`, `TownshipStatus`, `Map`) VALUES
+(1, 'San Chaung', '11111', 3000, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15277.662317243134!2d96.12386759255594!3d16.805727235144587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1eb46fd85e9eb%3A0xf8fce784abe0fff6!2sSanchaung%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1709656882452!5m2!1sen!2smm'),
+(3, 'Ahlone', '11121', 3500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15279.379452546482!2d96.11627774735773!3d16.78439224405471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1eb0dddf12fa9%3A0x2176e236e4fa957d!2sAhlone%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710692646730!5m2!1sen!2smm'),
+(4, 'Insein', '11012', 3000, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61079.503313815236!2d96.06268799779556!3d16.90214427937619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c195ce696dd4f7%3A0x8e6136e36e0ca442!2sInsein%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710692695594!5m2!1sen!2smm'),
+(5, 'Bahan', '11201', 3000, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30554.47322035116!2d96.13673575453456!3d16.811012474771704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1eca8da00badf%3A0xddcffcdec96b413!2sBahan%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710692761414!5m2!1sen!2smm'),
+(6, 'Botahtaung', '11162', 4500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30561.54480205114!2d96.1659171044692!3d16.767065827138087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1ec572fd7b483%3A0xef7e55c8271f5a44!2sBotahtaung%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710692818037!5m2!1sen!2smm'),
+(7, 'Dagon Myothit (North)', '11421', 4500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61084.63980995356!2d96.15043169769989!3d16.88628028278481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c193b44e8b67b3%3A0xb50d88d2ceee17e7!2sNorth%20Dagon%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710692859767!5m2!1sen!2smm'),
+(8, 'Dagon Myothit (South)', '11431', 4500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61092.3315721513!2d96.20561619755644!3d16.862497287897316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c18d7847745be7%3A0xce39d8fefee3ccc4!2sSouth%20Dagon%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710692926251!5m2!1sen!2smm'),
+(9, 'Dawbon', '11241', 4000, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30558.336375932937!2d96.17372915449886!3d16.7870185760634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1ece26305ca09%3A0x972e929cb85e3216!2sDawbon%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710692982433!5m2!1sen!2smm'),
+(10, 'Mayangone', '11061', 3500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61093.604759684094!2d96.09567059753276!3d16.858557438744505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1948e78bf147f%3A0x15e50b9976b35317!2sMayangon%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710693046886!5m2!1sen!2smm'),
+(11, 'Lanmadaw', '11131', 4000, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15279.773816739538!2d96.13069684735588!3d16.77948864412073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1eb774b16099f%3A0x473659265a8e769f!2sLanmadaw%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710693129198!5m2!1sen!2smm'),
+(12, 'Kamayut', '11041', 2500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30552.485693433053!2d96.10908625455295!3d16.823343974108134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c194caf1b44735%3A0x699d28c8674522a3!2sKamayut%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710693253837!5m2!1sen!2smm'),
+(13, 'Kyauktada', '11182', 3500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7640.096404607065!2d96.15628804118941!3d16.774277286048136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1ec87973cb12b%3A0xe16b702dae6bba2b!2sKyauktada%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710693323237!5m2!1sen!2smm'),
+(14, 'Mingalardon', '11021', 4000, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122102.55253822816!2d96.05341209341425!3d16.98906644197341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c197413b5696a5%3A0x7c8afbb7c5351fe!2sMingaladon%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710693374582!5m2!1sen!2smm'),
+(15, 'Pazundaung', '11171', 3500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7639.954825362392!2d96.17177899118992!3d16.777799336036427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1ecf47b4a016b%3A0x370cdda555ca0295!2sPazundaung%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710693431726!5m2!1sen!2smm'),
+(16, 'Hlaing', '11051', 2500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30548.874195677003!2d96.09941265458635!3d16.84572887290407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c194e7ee58f64d%3A0x6e974e7cb775f1a9!2sHlaing%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710693484070!5m2!1sen!2smm'),
+(17, 'Pabedan', '11141', 3500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7640.031402051633!2d96.15094204118964!3d16.775894436042876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1ec80e3426cef%3A0x4b8ad37d9f2c33a5!2sPabedan%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710693538391!5m2!1sen!2smm'),
+(18, 'Tamwe', '11211', 3500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30554.716182868095!2d96.15637230453234!3d16.809504424852893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1ecc8f3749e61%3A0x9e8be4b57c0f92d1!2sTamwe%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710693592949!5m2!1sen!2smm'),
+(19, 'Tharkayta', '11231', 4500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30556.99192597529!2d96.19404740451131!3d16.795372675613585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1ed3fdbe25a8d%3A0xd6e831efad57e0af!2sThaketa%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710693637245!5m2!1sen!2smm'),
+(20, 'Thingangyun', '11071', 3500, 'Active', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30551.457173396102!2d96.17346715456246!3d16.82972192376501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c19328140c51cb%3A0x4f57521ebec58bf2!2sThingangyun%20Township%2C%20Yangon!5e0!3m2!1sen!2smm!4v1710693691686!5m2!1sen!2smm');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`BrandID`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`CategoryID`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`ContactID`),
+  ADD KEY `CustomerID` (`CustomerID`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`CustomerID`);
+
+--
+-- Indexes for table `deliveries`
+--
+ALTER TABLE `deliveries`
+  ADD PRIMARY KEY (`DeliveryID`),
+  ADD KEY `StaffID` (`StaffID`);
+
+--
+-- Indexes for table `orderdetails`
+--
+ALTER TABLE `orderdetails`
+  ADD PRIMARY KEY (`OrderID`,`ProductID`),
+  ADD KEY `ProductID` (`ProductID`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`OrderID`),
+  ADD KEY `CustomerID` (`CustomerID`),
+  ADD KEY `TownshipID` (`TownshipID`),
+  ADD KEY `DeliveryID` (`DeliveryID`);
+
+--
+-- Indexes for table `positions`
+--
+ALTER TABLE `positions`
+  ADD PRIMARY KEY (`PositionID`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`ProductID`),
+  ADD KEY `BrandID` (`BrandID`),
+  ADD KEY `CategoryID` (`CategoryID`);
+
+--
+-- Indexes for table `purchasedetails`
+--
+ALTER TABLE `purchasedetails`
+  ADD PRIMARY KEY (`PurchaseID`,`ProductID`),
+  ADD KEY `FK_ProductID` (`ProductID`);
+
+--
+-- Indexes for table `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`PurchaseID`),
+  ADD KEY `StaffID` (`StaffID`),
+  ADD KEY `SupplierID` (`SupplierID`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`ReviewID`),
+  ADD KEY `CustomerID` (`CustomerID`),
+  ADD KEY `ProductID` (`ProductID`);
+
+--
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`StaffID`),
+  ADD KEY `PositionID` (`PositionID`);
+
+--
+-- Indexes for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`SupplierID`);
+
+--
+-- Indexes for table `townships`
+--
+ALTER TABLE `townships`
+  ADD PRIMARY KEY (`TownshipID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `BrandID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `CategoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `ContactID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `positions`
+--
+ALTER TABLE `positions`
+  MODIFY `PositionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `ReviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `StaffID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  MODIFY `SupplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `townships`
+--
+ALTER TABLE `townships`
+  MODIFY `TownshipID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD CONSTRAINT `contacts_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`);
+
+--
+-- Constraints for table `deliveries`
+--
+ALTER TABLE `deliveries`
+  ADD CONSTRAINT `deliveries_ibfk_1` FOREIGN KEY (`StaffID`) REFERENCES `staff` (`StaffID`);
+
+--
+-- Constraints for table `orderdetails`
+--
+ALTER TABLE `orderdetails`
+  ADD CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`),
+  ADD CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ProductID`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `DeliveryID` FOREIGN KEY (`DeliveryID`) REFERENCES `deliveries` (`DeliveryID`),
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`TownshipID`) REFERENCES `townships` (`TownshipID`);
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`BrandID`) REFERENCES `brands` (`BrandID`),
+  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`CategoryID`) REFERENCES `categories` (`CategoryID`);
+
+--
+-- Constraints for table `purchasedetails`
+--
+ALTER TABLE `purchasedetails`
+  ADD CONSTRAINT `FK_ProductID` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ProductID`);
+
+--
+-- Constraints for table `purchases`
+--
+ALTER TABLE `purchases`
+  ADD CONSTRAINT `purchases_ibfk_1` FOREIGN KEY (`StaffID`) REFERENCES `staff` (`StaffID`),
+  ADD CONSTRAINT `purchases_ibfk_2` FOREIGN KEY (`SupplierID`) REFERENCES `suppliers` (`SupplierID`);
+
+--
+-- Constraints for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`),
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ProductID`);
+
+--
+-- Constraints for table `staff`
+--
+ALTER TABLE `staff`
+  ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`PositionID`) REFERENCES `positions` (`PositionID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
